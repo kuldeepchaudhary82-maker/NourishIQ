@@ -1,0 +1,270 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id                String   @id @default(uuid())
+  email             String   @unique
+  phone             String?
+  passwordHash      String
+  name              String
+  role              Role     @default(USER)
+  subscriptionTier  Tier     @default(FREE)
+  isVerified        Boolean  @default(false)
+  fcmToken          String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  healthProfile     HealthProfile?
+  bodyCompositions  BodyComposition[]
+  labResults        LabResult[]
+  dietaryPrefs      DietaryPreference?
+  lifestyle         Lifestyle?
+  generatedPlans    GeneratedPlan[]
+  mealLogs          MealLog[]
+  supplementLogs    SupplementLog[]
+  activityLogs      ActivityLog[]
+  conversations     AiConversation[]
+  subscription      Subscription?
+  notifications     Notification[]
+  weeklyReports     WeeklyReport[]
+  clinicId          String?
+  clinic            User?    @relation("ClinicPatients", fields: [clinicId], references: [id])
+  patients          User[]   @relation("ClinicPatients")
+}
+
+enum Role { 
+  USER 
+  ADMIN 
+  SUPERADMIN 
+}
+
+enum Tier { 
+  FREE 
+  CORE 
+  PRO 
+  CLINIC 
+}
+
+model HealthProfile {
+  id           String  @id @default(uuid())
+  userId       String  @unique
+  user         User    @relation(fields: [userId], references: [id])
+  age          Int
+  gender       String
+  heightCm     Float
+  currentWeight Float
+  targetWeight Float
+  city         String
+  language     String  @default("en")
+}
+
+model BodyComposition {
+  id               String   @id @default(uuid())
+  userId           String
+  user             User     @relation(fields: [userId], references: [id])
+  date             DateTime
+  weightKg         Float
+  bodyFatPct       Float?
+  visceralFatPct   Float?
+  skeletalMusclePct Float?
+  bmr              Float?
+  bmi              Float?
+  subcutaneousFat  Float?
+  waistCm          Float?
+}
+
+model LabResult {
+  id           String   @id @default(uuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id])
+  testDate     DateTime
+  markerName   String
+  value        Float
+  unit         String
+  referenceMin Float?
+  referenceMax Float?
+  status       String?
+  reportUrl    String?
+}
+
+model DietaryPreference {
+  id              String   @id @default(uuid())
+  userId          String   @unique
+  user            User     @relation(fields: [userId], references: [id])
+  dietType        String
+  allergies       String[]
+  likedFoods      String[]
+  dislikedFoods   String[]
+  cuisinePref     String[]
+  cookingTime     String
+  cookingSkill    String
+}
+
+model Lifestyle {
+  id              String @id @default(uuid())
+  userId          String @unique
+  user            User   @relation(fields: [userId], references: [id])
+  activityLevel   String
+  exerciseTypes   String[]
+  exerciseFreqPerWeek Int
+  exerciseDurationMins Int
+  sleepBedtime    String
+  sleepWaketime   String
+  stressLevel     String
+  occupationType  String
+  wearableDevice  String?
+  primaryGoals    String[]
+}
+
+model GeneratedPlan {
+  id              String   @id @default(uuid())
+  userId          String
+  user            User     @relation(fields: [userId], references: [id])
+  generatedAt     DateTime @default(now())
+  validUntil      DateTime
+  calorieTargets  Json
+  macroTargets    Json
+  mealPlan        Json
+  supplementStack Json
+  dailySchedule   Json
+  labFlags        Json
+  lifestyleProtocol Json
+  pdfUrl          String?
+  isActive        Boolean  @default(true)
+}
+
+model MealLog {
+  id           String   @id @default(uuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id])
+  date             DateTime
+  mealSlot     String
+  plannedMeal  String?
+  loggedMeal   String?
+  proteinG     Float?
+  carbsG       Float?
+  fatG         Float?
+  kcal         Float?
+  status       String
+  notes        String?
+}
+
+model SupplementLog {
+  id             String   @id @default(uuid())
+  userId         String
+  user           User     @relation(fields: [userId], references: [id])
+  date           DateTime
+  supplementName String
+  doseAmount     String
+  scheduledTime  String
+  takenAt        DateTime?
+  status         String
+}
+
+model ActivityLog {
+  id             String   @id @default(uuid())
+  userId         String
+  user           User     @relation(fields: [userId], references: [id])
+  date           DateTime
+  source         String
+  steps          Int?
+  activeCalories Float?
+  exerciseMins   Int?
+  sleepHours     Float?
+  restingHR      Int?
+  waterMl        Int?
+}
+
+model AiConversation {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  messages  Json
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Subscription {
+  id                    String   @id @default(uuid())
+  userId                String   @unique
+  user                  User     @relation(fields: [userId], references: [id])
+  tier                  Tier
+  status                String
+  startedAt             DateTime
+  renewsAt              DateTime?
+  cancelledAt           DateTime?
+  razorpaySubId         String?
+  razorpayCustomerId    String?
+  trialEndsAt           DateTime?
+}
+
+model Notification {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  type      String
+  title     String
+  body      String
+  data      Json?
+  sentAt    DateTime?
+  readAt    DateTime?
+  status    String   @default("pending")
+}
+
+model ContentLibrary {
+  id          String   @id @default(uuid())
+  type        String
+  title       String
+  body        String
+  tags        String[]
+  targetTier  Tier[]
+  isPublished Boolean  @default(false)
+  createdBy   String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model FoodDatabase {
+  id          String  @id @default(uuid())
+  name        String
+  nameHindi   String?
+  category    String
+  per100gProtein Float
+  per100gCarbs   Float
+  per100gFat     Float
+  per100gKcal    Float
+  isIndian    Boolean @default(false)
+  season      String?
+  region      String?
+}
+
+model AuditLog {
+  id          String   @id @default(uuid())
+  adminId     String
+  action      String
+  details     String
+  targetType  String?
+  targetId    String?
+  createdAt   DateTime @default(now())
+}
+
+model WeeklyReport {
+  id          String   @id @default(uuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  startDate   DateTime
+  endDate     DateTime
+  summary     String   // AI generated summary text
+  adherence   Float    // Overall adherence score (0-100)
+  insights    Json     // Array of specific insights
+  recommendations Json // Array of recommendations
+  createdAt   DateTime @default(now())
+
+  @@index([userId])
+}
