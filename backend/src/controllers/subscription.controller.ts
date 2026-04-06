@@ -80,8 +80,8 @@ export const verifyWebhook = async (req: Request, res: Response) => {
       break;
 
     case 'subscription.cancelled':
-      await prisma.subscription.update({
-        where: { id: razorpaySubId },
+      await prisma.subscription.updateMany({
+        where: { razorpaySubId },
         data: { status: 'cancelled', cancelledAt: new Date() },
       });
       break;

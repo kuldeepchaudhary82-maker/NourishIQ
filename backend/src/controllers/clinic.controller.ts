@@ -27,7 +27,7 @@ export const registerClinicPatient = async (req: Request, res: Response) => {
       data: {
         name,
         email,
-        passwordHash: password, // In reality, hash this!
+        passwordHash: require('bcryptjs').hashSync(password, 10),
         role: 'USER',
         subscriptionTier: 'CLINIC',
         clinicId,

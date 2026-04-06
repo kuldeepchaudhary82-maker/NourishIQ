@@ -17,12 +17,16 @@ const loginSchema = z.object({
 });
 
 const generateTokens = (userId: string, role: string) => {
-  const accessToken = jwt.sign({ userId, role }, process.env.JWT_SECRET!, {
-    expiresIn: (process.env.JWT_EXPIRY as any) || "15m",
-  });
-  const refreshToken = jwt.sign({ userId }, process.env.JWT_REFRESH_SECRET!, {
-    expiresIn: (process.env.REFRESH_EXPIRY as any) || "30d",
-  });
+  const accessToken = jwt.sign(
+    { userId, role },
+    process.env.JWT_SECRET!,
+    { expiresIn: '15m' } as jwt.SignOptions
+  );
+  const refreshToken = jwt.sign(
+    { userId },
+    process.env.JWT_REFRESH_SECRET!,
+    { expiresIn: '30d' } as jwt.SignOptions
+  );
   return { accessToken, refreshToken };
 };
 

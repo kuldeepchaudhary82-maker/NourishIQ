@@ -86,6 +86,35 @@ export const logActivity = async (req: Request, res: Response) => {
   }
 };
 
+export const logWater = async (req: Request, res: Response) => {
+  const userId = (req as any).user.userId;
+  try {
+    const { date, waterMl } = req.body;
+    const targetDate = new Date(date);
+    const startOfDay = new Date(targetDate.setHours(0, 0, 0, 0));
+    const endOfDay = new Date(new Date(date).setHours(23, 59, 59, 999));
+
+    const existing = await prisma.activityLog.findFirst({
+      where: { userId, date: { gte: startOfDay, lte: endOfDay }, source: 'MANUAL_WATER' },
+    });
+
+    if (existing) {
+      const updated = await prisma.activityLog.update({
+        where: { id: existing.id },
+        data: { waterMl: (existing.waterMl || 0) + waterMl },
+      });
+      return res.json(updated);
+    }
+
+    const log = await prisma.activityLog.create({
+      data: { userId, date: startOfDay, source: 'MANUAL_WATER', waterMl },
+    });
+    res.status(201).json(log);
+  } catch (error: any) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
 export const getDaySummary = async (req: Request, res: Response) => {
   const userId = (req as any).user.userId;
   const { date } = req.params;
