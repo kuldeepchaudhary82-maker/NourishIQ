@@ -1,8 +1,7 @@
 import app from './app';
-import { PrismaClient } from '@prisma/client';
+import prisma from './utils/prisma';
 import './jobs/reminders.job';
 
-const prisma = new PrismaClient();
 const PORT = process.env.PORT || 3000;
 
 async function main() {

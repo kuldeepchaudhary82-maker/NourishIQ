@@ -1,8 +1,6 @@
 import { Request, Response } from 'express';
-import { PrismaClient } from '@prisma/client';
+import prisma from '../utils/prisma';
 import * as aiService from '../services/ai.service';
-
-const prisma = new PrismaClient();
 
 export const generatePlan = async (req: Request, res: Response) => {
   const userId = (req as any).user.userId;

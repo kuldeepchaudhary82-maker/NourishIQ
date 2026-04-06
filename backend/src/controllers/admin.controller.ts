@@ -1,8 +1,6 @@
 import { Request, Response } from 'express';
-import { PrismaClient } from '@prisma/client';
+import prisma from '../utils/prisma';
 import admin from 'firebase-admin';
-
-const prisma = new PrismaClient();
 
 export const createAuditLog = async (adminId: string, action: string, details: string, targetType?: string, targetId?: string) => {
   try {

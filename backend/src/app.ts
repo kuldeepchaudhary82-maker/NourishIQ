@@ -29,6 +29,11 @@ app.use(cors({
 app.use(express.json());
 app.use(morgan('dev'));
 
+// Health check
+app.get('/health', (req, res) => {
+  res.json({ status: 'ok', timestamp: new Date().toISOString() });
+});
+
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);

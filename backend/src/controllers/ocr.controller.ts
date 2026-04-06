@@ -1,9 +1,7 @@
 import { Request, Response } from 'express';
-import { PrismaClient } from '@prisma/client';
+import prisma from '../utils/prisma';
 import * as ocrService from '../services/ocr.service';
 import { createAuditLog } from './admin.controller';
-
-const prisma = new PrismaClient();
 
 export const uploadAndProcessLabReport = async (req: Request, res: Response) => {
   const userId = (req as any).user.userId;

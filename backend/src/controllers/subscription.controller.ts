@@ -1,9 +1,9 @@
 import Razorpay from 'razorpay';
 import crypto from 'crypto';
 import { Request, Response } from 'express';
-import { PrismaClient, Tier } from '@prisma/client';
+import { Tier } from '@prisma/client';
+import prisma from '../utils/prisma';
 
-const prisma = new PrismaClient();
 const razorpay = new Razorpay({
   key_id: process.env.RAZORPAY_KEY_ID!,
   key_secret: process.env.RAZORPAY_KEY_SECRET!,

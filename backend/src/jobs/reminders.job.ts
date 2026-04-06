@@ -1,9 +1,7 @@
 import cron from 'node-cron';
-import { PrismaClient } from '@prisma/client';
+import prisma from '../utils/prisma';
 import * as notificationService from '../services/notification.service';
 import Anthropic from '@anthropic-ai/sdk';
-
-const prisma = new PrismaClient();
 const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
 });
