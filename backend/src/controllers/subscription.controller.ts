@@ -4,16 +4,23 @@ import { Request, Response } from 'express';
 import { Tier } from '@prisma/client';
 import prisma from '../utils/prisma';
 
-const razorpay = new Razorpay({
-  key_id: process.env.RAZORPAY_KEY_ID!,
-  key_secret: process.env.RAZORPAY_KEY_SECRET!,
-});
+// Lazy initialization — avoids crash on startup when env vars are not set
+const getRazorpay = () => {
+  if (!process.env.RAZORPAY_KEY_ID || !process.env.RAZORPAY_KEY_SECRET) {
+    throw new Error('Razorpay credentials are not configured');
+  }
+  return new Razorpay({
+    key_id: process.env.RAZORPAY_KEY_ID,
+    key_secret: process.env.RAZORPAY_KEY_SECRET,
+  });
+};
 
 export const createSubscription = async (req: Request, res: Response) => {
   const userId = (req as any).user.userId;
   const { planId } = req.body; // Razorpay Plan ID
 
   try {
+    const razorpay = getRazorpay();
     const subscription = await razorpay.subscriptions.create({
       plan_id: planId,
       customer_notify: 1,
