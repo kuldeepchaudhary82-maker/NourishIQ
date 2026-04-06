@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, Users, CreditCard, BookOpen, Bell, BarChart2, Settings, LogOut, ShieldAlert } from 'lucide-react';
+import { LayoutDashboard, Users, CreditCard, BookOpen, Bell, BarChart2, Settings, LogOut, ShieldAlert, Stethoscope } from 'lucide-react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
