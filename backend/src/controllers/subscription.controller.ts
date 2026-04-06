@@ -81,7 +81,7 @@ export const verifyWebhook = async (req: Request, res: Response) => {
 
     case 'subscription.cancelled':
       await prisma.subscription.update({
-        where: { razorpaySubId },
+        where: { id: razorpaySubId },
         data: { status: 'cancelled', cancelledAt: new Date() },
       });
       break;

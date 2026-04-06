@@ -21,7 +21,7 @@ export const generateWeeklyReport = async (userId: string) => {
 
     const mealStats = meals.reduce((acc, m) => {
       acc.total += 1;
-      if (m.type !== 'SNACK') acc.mainMeals += 1;
+      if (m.mealSlot !== "SNACK") acc.mainMeals += 1;
       return acc;
     }, { total: 0, mainMeals: 0 });
 
