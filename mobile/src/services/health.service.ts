@@ -33,7 +33,7 @@ export const syncHealthData = (accessToken: string) => {
     // Sync Steps
     AppleHealthKit.getStepCount(options, (err, results) => {
       if (results) {
-        axios.post('http://localhost:3000/api/log/activity/sync', {
+        axios.post('https://nourishiq-production.up.railway.app/api/log/activity/sync', {
           date: new Date().toISOString(),
           steps: results.value,
           source: 'HEALTH_KIT',
@@ -46,7 +46,7 @@ export const syncHealthData = (accessToken: string) => {
     // Sync Calories
     AppleHealthKit.getActiveEnergyBurned(options, (err, results) => {
       if (results && results.length > 0) {
-        axios.post('http://localhost:3000/api/log/activity/sync', {
+        axios.post('https://nourishiq-production.up.railway.app/api/log/activity/sync', {
           date: new Date().toISOString(),
           activeCalories: results[0].value,
           source: 'HEALTH_KIT',

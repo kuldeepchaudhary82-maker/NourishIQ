@@ -13,7 +13,7 @@ const WeeklyReportDetailScreen = ({ route, navigation }: any) => {
   useEffect(() => {
     const fetchReport = async () => {
       try {
-        const res = await axios.get(`http://localhost:3000/api/reports/${reportId}`, {
+        const res = await axios.get(`https://nourishiq-production.up.railway.app/api/reports/${reportId}`, {
           headers: { Authorization: `Bearer ${accessToken}` }
         });
         setReport(res.data);

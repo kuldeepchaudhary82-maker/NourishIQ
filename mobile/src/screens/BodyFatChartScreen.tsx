@@ -14,7 +14,7 @@ const BodyFatChartScreen = ({ navigation }: any) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`http://localhost:3000/api/metrics/charts/bodyfat?range=${range}`, {
+        const res = await axios.get(`https://nourishiq-production.up.railway.app/api/metrics/charts/bodyfat?range=${range}`, {
           headers: { Authorization: `Bearer ${accessToken}` }
         });
         const formattedData = res.data.map((d: any) => ({

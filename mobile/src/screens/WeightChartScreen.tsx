@@ -14,7 +14,7 @@ const WeightChartScreen = ({ navigation }: any) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`http://localhost:3000/api/metrics/charts/weight?range=${range}`, {
+        const res = await axios.get(`https://nourishiq-production.up.railway.app/api/metrics/charts/weight?range=${range}`, {
           headers: { Authorization: `Bearer ${accessToken}` }
         });
         // Ensure x is a Date object for Victory

@@ -11,7 +11,7 @@ const ClinicDashboard = () => {
   useEffect(() => {
     const fetchPatients = async () => {
       try {
-        const res = await axios.get('http://localhost:3000/api/admin/users?role=USER');
+        const res = await axios.get('https://nourishiq-production.up.railway.app/api/admin/users?role=USER');
         setPatients(res.data.users);
       } catch (err) {
         console.error(err);

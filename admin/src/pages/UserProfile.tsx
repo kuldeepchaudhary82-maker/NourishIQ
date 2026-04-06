@@ -13,7 +13,7 @@ const UserProfile = () => {
     // In a real app, you'd use the admin's token
     const fetchUser = async () => {
       try {
-        const res = await axios.get(`http://localhost:3000/api/admin/users/${id}`);
+        const res = await axios.get(`https://nourishiq-production.up.railway.app/api/admin/users/${id}`);
         setUser(res.data);
       } catch (err) {
         console.error(err);

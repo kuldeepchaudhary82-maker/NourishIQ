@@ -13,7 +13,7 @@ const BroadcastNotifications = () => {
   const handleSend = async () => {
     setSending(true);
     try {
-      await axios.post('http://localhost:3000/api/admin/broadcast', {
+      await axios.post('https://nourishiq-production.up.railway.app/api/admin/broadcast', {
         target,
         title,
         body,

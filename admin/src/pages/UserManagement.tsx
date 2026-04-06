@@ -12,7 +12,7 @@ const UserManagement = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await axios.get(`http://localhost:3000/api/admin/users?search=${searchTerm}`);
+        const res = await axios.get(`https://nourishiq-production.up.railway.app/api/admin/users?search=${searchTerm}`);
         setUsers(res.data.users);
         setTotal(res.data.total);
       } catch (err) {

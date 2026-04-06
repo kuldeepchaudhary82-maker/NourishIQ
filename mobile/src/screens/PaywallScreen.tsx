@@ -20,7 +20,7 @@ const PaywallScreen = ({ navigation }: any) => {
 
   const handleCheckout = async (planId: string, amount: number) => {
     try {
-      const res = await axios.post('http://localhost:3000/api/subscription/create', { planId }, {
+      const res = await axios.post('https://nourishiq-production.up.railway.app/api/subscription/create', { planId }, {
         headers: { Authorization: `Bearer ${accessToken}` }
       });
 

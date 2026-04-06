@@ -12,7 +12,7 @@ const LabResultsScreen = ({ navigation }: any) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get('http://localhost:3000/api/metrics/lab-results', {
+        const res = await axios.get('https://nourishiq-production.up.railway.app/api/metrics/lab-results', {
           headers: { Authorization: `Bearer ${accessToken}` }
         });
         setLabResults(res.data);

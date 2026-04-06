@@ -12,7 +12,7 @@ const PlanHomeScreen = ({ navigation }: any) => {
   useEffect(() => {
     const fetchPlan = async () => {
       try {
-        const res = await axios.get('http://localhost:3000/api/plan/current', {
+        const res = await axios.get('https://nourishiq-production.up.railway.app/api/plan/current', {
           headers: { Authorization: `Bearer ${accessToken}` }
         });
         setPlan(res.data);

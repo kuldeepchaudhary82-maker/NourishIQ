@@ -9,7 +9,7 @@ const Subscriptions = () => {
 
   const fetchSubscriptions = async () => {
     try {
-      const res = await axios.get(`http://localhost:3000/api/analytics/subscriptions?status=${filterStatus}`);
+      const res = await axios.get(`https://nourishiq-production.up.railway.app/api/analytics/subscriptions?status=${filterStatus}`);
       setSubscriptions(res.data.subscriptions);
     } catch (err) {
       console.error(err);

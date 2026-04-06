@@ -38,7 +38,7 @@ const UploadLabReportScreen = ({ navigation }: any) => {
     } as any);
 
     try {
-      const res = await axios.post('http://localhost:3000/api/metrics/lab-results/ocr', formData, {
+      const res = await axios.post('https://nourishiq-production.up.railway.app/api/metrics/lab-results/ocr', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${accessToken}`,
@@ -57,7 +57,7 @@ const UploadLabReportScreen = ({ navigation }: any) => {
     setLoading(true);
 
     try {
-      await axios.post('http://localhost:3000/api/metrics/lab-results/confirm', {
+      await axios.post('https://nourishiq-production.up.railway.app/api/metrics/lab-results/confirm', {
         results: extractedData,
       }, {
         headers: { Authorization: `Bearer ${accessToken}` },

@@ -31,7 +31,7 @@ export const registerForPushNotificationsAsync = async (accessToken: string) => 
 
   // Send the token to your backend
   try {
-    await axios.post('http://localhost:3000/api/notifications/fcm-token', {
+    await axios.post('https://nourishiq-production.up.railway.app/api/notifications/fcm-token', {
       fcmToken: token,
     }, {
       headers: { Authorization: `Bearer ${accessToken}` }

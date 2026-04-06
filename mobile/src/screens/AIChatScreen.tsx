@@ -21,7 +21,7 @@ const AIChatScreen = ({ navigation }: any) => {
     setLoading(true);
 
     try {
-      const res = await axios.post('http://localhost:3000/api/coach/chat', {
+      const res = await axios.post('https://nourishiq-production.up.railway.app/api/coach/chat', {
         message: inputText,
         conversationId
       }, {

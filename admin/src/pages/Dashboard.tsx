@@ -23,8 +23,8 @@ const Dashboard = () => {
     const fetchDashboardData = async () => {
       try {
         const [statsRes, logsRes] = await Promise.all([
-          axios.get('http://localhost:3000/api/admin/stats'),
-          axios.get('http://localhost:3000/api/admin/audit-logs?limit=5'),
+          axios.get('https://nourishiq-production.up.railway.app/api/admin/stats'),
+          axios.get('https://nourishiq-production.up.railway.app/api/admin/audit-logs?limit=5'),
         ]);
         setStats(statsRes.data);
         setRecentLogs(logsRes.data);

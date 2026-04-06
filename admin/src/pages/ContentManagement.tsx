@@ -10,9 +10,9 @@ const ContentManagement = () => {
   const fetchContent = async () => {
     try {
       let url = '';
-      if (activeTab === 'TIPS') url = 'http://localhost:3000/api/content/tips';
-      if (activeTab === 'ARTICLES') url = 'http://localhost:3000/api/content/articles';
-      if (activeTab === 'FOOD') url = 'http://localhost:3000/api/content/food-database/search';
+      if (activeTab === 'TIPS') url = 'https://nourishiq-production.up.railway.app/api/content/tips';
+      if (activeTab === 'ARTICLES') url = 'https://nourishiq-production.up.railway.app/api/content/articles';
+      if (activeTab === 'FOOD') url = 'https://nourishiq-production.up.railway.app/api/content/food-database/search';
       
       const res = await axios.get(url);
       setContent(res.data);
@@ -24,8 +24,8 @@ const ContentManagement = () => {
   const handleDelete = async (id: string) => {
     if (!window.confirm('Are you sure you want to delete this content?')) return;
     try {
-      let url = `http://localhost:3000/api/admin/content/${id}`;
-      if (activeTab === 'FOOD') url = `http://localhost:3000/api/admin/food-database/${id}`;
+      let url = `https://nourishiq-production.up.railway.app/api/admin/content/${id}`;
+      if (activeTab === 'FOOD') url = `https://nourishiq-production.up.railway.app/api/admin/food-database/${id}`;
       
       await axios.delete(url);
       setContent(content.filter(item => item.id !== id));

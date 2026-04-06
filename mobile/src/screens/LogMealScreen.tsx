@@ -13,7 +13,7 @@ const LogMealScreen = ({ navigation }: any) => {
   const handleLog = async () => {
     if (!mealName) return Alert.alert('Error', 'Please enter a meal name');
     try {
-      await axios.post('http://localhost:3000/api/log/meal', {
+      await axios.post('https://nourishiq-production.up.railway.app/api/log/meal', {
         date: new Date().toISOString(),
         mealSlot: slot.toLowerCase(),
         loggedMeal: mealName,

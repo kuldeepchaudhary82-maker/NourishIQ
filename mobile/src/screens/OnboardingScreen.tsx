@@ -17,7 +17,7 @@ const OnboardingScreen = ({ navigation }: any) => {
     
     // Save partial data to backend
     if (step === 1) {
-      await axios.post('http://localhost:3000/api/onboarding/health-profile', data, {
+      await axios.post('https://nourishiq-production.up.railway.app/api/onboarding/health-profile', data, {
         headers: { Authorization: `Bearer ${accessToken}` }
       });
     }
@@ -26,7 +26,7 @@ const OnboardingScreen = ({ navigation }: any) => {
       setStep(step + 1);
     } else {
       // Final step
-      await axios.post('http://localhost:3000/api/onboarding/complete', {}, {
+      await axios.post('https://nourishiq-production.up.railway.app/api/onboarding/complete', {}, {
         headers: { Authorization: `Bearer ${accessToken}` }
       });
       // Navigate to Home

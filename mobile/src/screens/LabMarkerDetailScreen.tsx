@@ -17,7 +17,7 @@ const LabMarkerDetailScreen = ({ route, navigation }: any) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`http://localhost:3000/api/metrics/charts/lab-marker?name=${markerName}`, {
+        const res = await axios.get(`https://nourishiq-production.up.railway.app/api/metrics/charts/lab-marker?name=${markerName}`, {
           headers: { Authorization: `Bearer ${accessToken}` }
         });
         const formattedData = res.data.map((d: any) => ({

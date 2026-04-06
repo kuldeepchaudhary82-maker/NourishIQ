@@ -27,7 +27,7 @@ const HomeScreen = ({ navigation }: any) => {
 
   const fetchData = async () => {
     try {
-      const planRes = await axios.get('http://localhost:3000/api/plan/current', {
+      const planRes = await axios.get('https://nourishiq-production.up.railway.app/api/plan/current', {
         headers: { Authorization: `Bearer ${accessToken}` }
       });
       setCurrentPlan(planRes.data);

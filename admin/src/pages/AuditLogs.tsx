@@ -9,7 +9,7 @@ const AuditLogs = () => {
   useEffect(() => {
     const fetchLogs = async () => {
       try {
-        const res = await axios.get('http://localhost:3000/api/admin/audit-logs');
+        const res = await axios.get('https://nourishiq-production.up.railway.app/api/admin/audit-logs');
         setLogs(res.data);
       } catch (err) {
         console.error(err);

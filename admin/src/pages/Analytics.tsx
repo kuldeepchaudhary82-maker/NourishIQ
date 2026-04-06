@@ -13,9 +13,9 @@ const Analytics = () => {
     const fetchAnalytics = async () => {
       try {
         const [growthRes, revenueRes, usageRes] = await Promise.all([
-          axios.get('http://localhost:3000/api/analytics/growth'),
-          axios.get('http://localhost:3000/api/analytics/revenue'),
-          axios.get('http://localhost:3000/api/analytics/usage'),
+          axios.get('https://nourishiq-production.up.railway.app/api/analytics/growth'),
+          axios.get('https://nourishiq-production.up.railway.app/api/analytics/revenue'),
+          axios.get('https://nourishiq-production.up.railway.app/api/analytics/usage'),
         ]);
 
         setGrowthData(growthRes.data);

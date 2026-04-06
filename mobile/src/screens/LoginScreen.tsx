@@ -10,7 +10,7 @@ const LoginScreen = ({ navigation }: any) => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('http://localhost:3000/api/auth/login', {
+      const response = await axios.post('https://nourishiq-production.up.railway.app/api/auth/login', {
         email,
         password,
       });

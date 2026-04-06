@@ -33,7 +33,7 @@ const ProgressHomeScreen = ({ navigation }: any) => {
 
   const fetchData = async () => {
     try {
-      const res = await axios.get('http://localhost:3000/api/metrics/progress/summary', {
+      const res = await axios.get('https://nourishiq-production.up.railway.app/api/metrics/progress/summary', {
         headers: { Authorization: `Bearer ${accessToken}` }
       });
       setSummary(res.data);
