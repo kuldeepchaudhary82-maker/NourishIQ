@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, Users, CreditCard, BookOpen, Bell, BarChart2, Settings, LogOut, ShieldAlert, Stethoscope } from 'lucide-react';
+import { LayoutDashboard, Users, CreditCard, BookOpen, Bell, BarChart2, Settings, LogOut, ShieldAlert, Activity } from 'lucide-react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -44,7 +44,7 @@ const AdminSidebar = () => {
         <SidebarItem to="/content" icon={<BookOpen size={20} />} label="Content" />
         <SidebarItem to="/notifications" icon={<Bell size={20} />} label="Broadcast" />
         <SidebarItem to="/analytics" icon={<BarChart2 size={20} />} label="Analytics" />
-        <SidebarItem to="/clinic" icon={<Stethoscope size={20} />} label="Clinic Dashboard" />
+        <SidebarItem to="/clinic" icon={<Activity size={20} />} label="Clinic Dashboard" />
         <SidebarItem to="/audit-logs" icon={<ShieldAlert size={20} />} label="Security Logs" />
       </nav>
 
